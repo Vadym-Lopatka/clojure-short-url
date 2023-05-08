@@ -31,6 +31,22 @@
 (defn insert! [q]
   (j/db-do-prepared pg-db q))
 
+(defn insert-redirect! [slug url] 
+  (insert! (-> (insert-into :redirects)
+               (columns :slug :url)
+               (values
+                [[slug url]])
+               (sql/format))))
+
+(defn get-url [slug]
+  (-> (query (->
+          (select :*) 
+          (from :redirects) 
+          (where [:= :slug slug])
+          (sql/format)))
+      first
+      :url))
+
 (comment
   (query (-> (select :*)
              (from :redirects)
@@ -38,8 +54,11 @@
   (insert! (-> (insert-into :redirects)
                (columns :slug :url)
                (values 
-                [["abc" "https://www.youtube.com/watch?v=0mrguRPgCzI&ab_channel=onthecodeagain"]])
+                [["clj" "https://clojure.org/guides/deps_and_cli"]
+                 ["hon" "https://github.com/seancorfield/honeysql"]])
                (sql/format)))
+  (insert-redirect! "aaa" "https://google.com")
+  (get-url "clj")
   )
 
 
