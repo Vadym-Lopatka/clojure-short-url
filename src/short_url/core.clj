@@ -4,7 +4,8 @@
             [ring.util.response :as r]
             [muuntaja.core :as m]
             [reitit.ring.middleware.muuntaja :as muuntaja]
-            [short-url.db :as db]))
+            [short-url.db :as db]
+            [short-url.slug :refer [generate-slug]]))
 
 
 (defn redirect [req]
@@ -14,12 +15,20 @@
       (r/redirect url 307)
       (r/not-found "URL is not found"))))
 
+(defn create-redirect [req]
+  (let [url (get-in req [:body-params :url])
+        slug (generate-slug)]
+    (db/insert-redirect! slug url)
+    (r/response (str "Created slug: " slug))))
+
 (def app
   (ring/ring-handler
    (ring/router
     ["/"
      [":slug/" redirect]
-     ["" {:handler (fn [req] {:body "Hello" :status 200})}]]
+     ["api/" 
+      ["redirect/" {:post create-redirect}]]
+     ["" {:handler (fn [req] {:body "Create redirect screen" :status 200})}]]
     {:data {:muuntaja m/instance
             :middleware [muuntaja/format-middleware]}})))
 
