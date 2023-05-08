@@ -1,7 +1,8 @@
 (ns short-url.db
   (:require [clojure.java.jdbc :as j]
             [honey.sql :as sql]
-            [honey.sql.helpers :refer :all]))
+            [honey.sql.helpers :refer :all]
+            [short-url.env :refer [env]]))
 
 ;; Before running queries - we need to prepare the db
 ;; I use local docker PostgreSQL instance described in docker-compose.yml
@@ -17,13 +18,13 @@
 ;;   url varchar(1000) NOT NULL                     
 ;; );
 
-(def pg-db {:dbtype "postgresql"
-            :dbname "shorturl"
-            :host "localhost"
-            :user "postgres"
-            :password "postgres"
-            :ssl false
-            :sslfactory "org.postgresql.ssl.NonValidatingFactory"})
+(def pg-db {:dbtype (env :DBTYPE)
+            :dbname (env :DBNAME)
+            :host (env :HOST)
+            :user (env :USER)
+            :password (env :PASSWORD)
+            :ssl (parse-boolean (env :SSL))
+            :sslfactory (env :SSLFACTORY)})
 
 (defn query [q]
   (j/query pg-db q))
