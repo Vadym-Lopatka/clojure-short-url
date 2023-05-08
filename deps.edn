@@ -1,1 +1,4 @@
-{}
+{:path ["/src"]
+ :deps {org.clojure/clojure {:mvn/version "1.11.1"}
+        org.clojure/java.jdbc {:mvn/version "0.7.12"}
+        mysql/mysql-connector-java {:mvn/version "5.1.6"}}}
