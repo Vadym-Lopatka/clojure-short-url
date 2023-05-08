@@ -3,12 +3,16 @@
             [reitit.ring :as ring]
             [ring.util.response :as r]
             [muuntaja.core :as m]
-            [reitit.ring.middleware.muuntaja :as muuntaja]))
+            [reitit.ring.middleware.muuntaja :as muuntaja]
+            [short-url.db :as db]))
 
 
 (defn redirect [req]
-  (let [slug (get-in req [:path-params :slug])]
-    (r/response slug)))
+  (let [slug (get-in req [:path-params :slug])
+        url (db/get-url slug)]
+    (if url
+      (r/redirect url 307)
+      (r/not-found "URL is not found"))))
 
 (def app
   (ring/ring-handler
