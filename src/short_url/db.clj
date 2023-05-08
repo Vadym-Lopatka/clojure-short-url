@@ -4,20 +4,6 @@
             [honey.sql.helpers :refer :all]
             [short-url.env :refer [env]]))
 
-;; Before running queries - we need to prepare the db
-;; I use local docker PostgreSQL instance described in docker-compose.yml
-;;
-;; start docker
-;;
-;; docker-compose up -d
-;;
-;; create database shorturl;
-;;
-;; CREATE TABLE redirects(
-;;   slug varchar(10) PRIMARY KEY NOT NULL,
-;;   url varchar(1000) NOT NULL                     
-;; );
-
 (def pg-db {:dbtype (env :DBTYPE)
             :dbname (env :DBNAME)
             :host (env :HOST)
@@ -61,6 +47,3 @@
   (insert-redirect! "aaa" "https://google.com")
   (get-url "clj")
   )
-
-
-
