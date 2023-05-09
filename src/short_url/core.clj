@@ -1,11 +1,12 @@
 (ns short-url.core
-  (:require [ring.adapter.jetty :as ring-jetty]
-            [reitit.ring :as ring]
-            [ring.util.response :as r]
-            [muuntaja.core :as m]
-            [reitit.ring.middleware.muuntaja :as muuntaja]
-            [short-url.db :as db]
-            [short-url.slug :refer [generate-slug]]))
+  (:require
+   [ring.adapter.jetty :as ring-jetty]
+   [reitit.ring :as ring]
+   [ring.util.response :as r]
+   [muuntaja.core :as m]
+   [reitit.ring.middleware.muuntaja :as muuntaja]
+   [short-url.db :as db]
+   [short-url.slug :refer [generate-slug]]))
 
 
 (defn redirect [req]
@@ -39,6 +40,3 @@
 (def server (start))
 
 (.stop server)
-
-;; (defn -main [&args]
-;;   (start))

@@ -1,8 +1,14 @@
 (ns short-url.db
-  (:require [clojure.java.jdbc :as j]
-            [honey.sql :as sql]
-            [honey.sql.helpers :refer :all]
-            [short-url.env :refer [env]]))
+  (:require 
+   [clojure.java.jdbc :as j] 
+   [honey.sql :as sql]
+   [honey.sql.helpers :refer [insert-into
+                              columns
+                              values
+                              select
+                              from
+                              where]]
+   [short-url.env :refer [env]]))
 
 (def pg-db {:dbtype (env :DBTYPE)
             :dbname (env :DBNAME)
@@ -27,10 +33,10 @@
 
 (defn get-url [slug]
   (-> (query (->
-          (select :*) 
-          (from :redirects) 
-          (where [:= :slug slug])
-          (sql/format)))
+              (select :*) 
+              (from :redirects) 
+              (where [:= :slug slug])
+              (sql/format)))
       first
       :url))
 
@@ -45,5 +51,5 @@
                  ["hon" "https://github.com/seancorfield/honeysql"]])
                (sql/format)))
   (insert-redirect! "aaa" "https://google.com")
-  (get-url "clj")
-  )
+  (get-url "clj"))
+  
