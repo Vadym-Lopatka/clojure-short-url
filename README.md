@@ -1,12 +1,16 @@
-# clojure-short-url
-
-Create a URL shortner with Clojure and PostgreSQL
-
+# URL shortner with Clojure and PostgreSQL
 based on this youtube tutorial:
 https://www.youtube.com/watch?v=0mrguRPgCzI&ab_channel=onthecodeagain
 
 
-DB preparation:
+## Tech stack backend
+- Clojure
+- DB: Postgresql, Java.JDBC, HoneySql
+- WebServer: Ring(jetty), Reitit, Muuntaja
+
+
+
+## DB preparation:
 
 1. Start the PostgreSQL server
 ```console
@@ -28,3 +32,7 @@ CREATE TABLE redirects(
   url varchar(1000) NOT NULL                     
 );
 ```
+
+## Start the app
+- do "DB preparation" first
+- start REPL based on deps.edn
