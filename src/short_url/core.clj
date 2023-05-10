@@ -29,7 +29,7 @@
      [":slug/" redirect]
      ["api/" 
       ["redirect/" {:post create-redirect}]]
-     ["" {:handler (fn [req] {:body "Create redirect screen" :status 200})}]]
+     ["" {:handler (fn [_] {:body "Create redirect screen" :status 200})}]]
     {:data {:muuntaja m/instance
             :middleware [muuntaja/format-middleware]}})))
 
