@@ -1,12 +1,17 @@
 # URL shortner with Clojure and PostgreSQL
-based on this youtube tutorial:
+based on this youtube tutorials:
 https://www.youtube.com/watch?v=0mrguRPgCzI&ab_channel=onthecodeagain
+https://www.youtube.com/watch?v=V-dBmuRsW6w&ab_channel=onthecodeagain
 
 
 ## Tech stack backend
 - Clojure
 - DB: Postgresql, Java.JDBC, HoneySql
 - WebServer: Ring(jetty), Reitit, Muuntaja
+## Tech stack frontend
+- Shadow-cljs(compile cljs to js)
+- Helix(React development in ClojureScript)
+- Tailwind CSS
 
 
 
