@@ -1,1 +1,4 @@
-(ns cljs.app.core)
+(ns app.core)
+
+(defn ^:export init []
+  (js/console.log "howzit"))
