@@ -1,4 +1,4 @@
-(ns short-url.db
+(ns shorturl.db
   (:require 
    [clojure.java.jdbc :as j] 
    [honey.sql :as sql]
@@ -8,7 +8,7 @@
                               select
                               from
                               where]]
-   [short-url.env :refer [env]]))
+   [shorturl.env :refer [env]]))
 
 (def pg-db {:dbtype (env :DBTYPE)
             :dbname (env :DBNAME)

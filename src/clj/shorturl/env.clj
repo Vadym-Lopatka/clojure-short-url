@@ -1,4 +1,4 @@
-(ns short-url.env
+(ns shorturl.env
   (:require 
    [clojure.edn :refer [read-string]]))
 

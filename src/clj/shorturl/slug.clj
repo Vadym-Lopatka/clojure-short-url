@@ -1,4 +1,4 @@
-(ns short-url.slug)
+(ns shorturl.slug)
 
 (def charset "ABSDEFGHIJKLMNOPQRSTUXYZ")
 
