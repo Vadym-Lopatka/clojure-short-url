@@ -13,7 +13,9 @@ https://www.youtube.com/watch?v=V-dBmuRsW6w&ab_channel=onthecodeagain
 - Helix(React development in ClojureScript)
 - Tailwind CSS
 
-
+## Start the app
+- do "DB preparation" first
+- start REPL based on deps.edn
 
 ## DB preparation:
 
@@ -27,17 +29,13 @@ $ docker-compose up -d
 
 2. Create DB and the "redirects" table via pgsql or another tool you prefer
 
-```pgsql> 
+```sql 
 CREATE DATABASE shorturl;
 ```
 
-```pgsql> 
+```sql 
 CREATE TABLE redirects(
   slug varchar(10) PRIMARY KEY NOT NULL,
   url varchar(1000) NOT NULL                     
 );
 ```
-
-## Start the app
-- do "DB preparation" first
-- start REPL based on deps.edn
